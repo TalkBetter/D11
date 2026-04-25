@@ -1,0 +1,2156 @@
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "28a5f7c0617a4f8aab97e95c1ea3e1b7"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WFQQ172YYK"></script>
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TalkBetter Week 11</title>
+  <style>
+    :root {
+      --bg:
+        radial-gradient(circle at 12% 10%, rgba(96, 165, 250, 0.28), transparent 24%),
+        radial-gradient(circle at 86% 14%, rgba(56, 189, 248, 0.18), transparent 26%),
+        radial-gradient(circle at 74% 78%, rgba(191, 219, 254, 0.22), transparent 24%),
+        linear-gradient(180deg, #eff7ff 0%, #f7fbff 42%, #edf5ff 100%);
+      --card: rgba(255, 255, 255, 0.9);
+      --line: rgba(96, 130, 182, 0.18);
+      --ink: #11243d;
+      --muted: #5b7191;
+      --teal: #1d4ed8;
+      --teal-soft: rgba(29, 78, 216, 0.1);
+      --orange: #2563eb;
+      --orange-soft: rgba(37, 99, 235, 0.1);
+      --berry: #1e40af;
+      --berry-soft: rgba(30, 64, 175, 0.1);
+      --sky: #0ea5e9;
+      --shadow: 0 22px 54px rgba(63, 103, 169, 0.14);
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --ui: "Trebuchet MS", "Segoe UI", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+      --head: "Georgia", "Times New Roman", serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: var(--ui);
+      background: var(--bg);
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      filter: blur(16px);
+      opacity: 0.4;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    body::before {
+      top: 60px;
+      left: -90px;
+      background: rgba(96, 165, 250, 0.36);
+    }
+
+    body::after {
+      right: -80px;
+      bottom: 48px;
+      background: rgba(125, 211, 252, 0.3);
+    }
+
+    button {
+      border: 0;
+      border-radius: 999px;
+      font: inherit;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+    }
+
+    button:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 26px 0 56px;
+    }
+
+    .hero,
+    .lesson-section {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background: var(--card);
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      padding: 30px;
+      background:
+        radial-gradient(circle at top right, rgba(14, 165, 233, 0.18), transparent 28%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.97), rgba(237, 245, 255, 0.93));
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.65fr) minmax(280px, 360px);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .eyebrow,
+    .section-kicker {
+      margin: 0 0 10px;
+      font-size: 0.95rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--teal);
+      font-weight: 800;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      color: #132238;
+    }
+
+    h1,
+    h2 {
+      font-family: var(--head);
+    }
+
+    h1 {
+      font-size: clamp(3.2rem, 5.5vw, 5rem);
+      line-height: 0.98;
+      letter-spacing: -0.03em;
+    }
+
+    h2 {
+      font-size: clamp(2.1rem, 3.8vw, 3rem);
+      line-height: 1.06;
+    }
+
+    .hero-copy p,
+    .section-desc,
+    .hero-note,
+    .mini-copy,
+    .example-copy,
+    .sense-copy {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 1.1rem;
+    }
+
+    .hero-copy p {
+      margin-top: 14px;
+      max-width: 42rem;
+      font-size: 1.18rem;
+    }
+
+    .hero-panel {
+      display: grid;
+      gap: 12px;
+      padding: 20px;
+      border: 1px solid rgba(100, 116, 139, 0.14);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.74);
+      box-shadow: 0 14px 28px rgba(59, 89, 152, 0.08);
+    }
+
+    .hero-actions,
+    .game-controls,
+    .footer-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .primary,
+    .audio-chip {
+      padding: 13px 18px;
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      color: #fff;
+      box-shadow: 0 12px 24px rgba(37, 99, 235, 0.22);
+      font-weight: 800;
+      font-size: 1.04rem;
+    }
+
+    .secondary {
+      padding: 13px 18px;
+      background: linear-gradient(135deg, #eaf2ff, #f4f9ff);
+      color: var(--orange);
+      box-shadow: 0 10px 22px rgba(37, 99, 235, 0.1);
+      font-weight: 800;
+      font-size: 1.04rem;
+    }
+
+    .ghost {
+      padding: 12px 18px;
+      background: rgba(255, 255, 255, 0.84);
+      color: var(--ink);
+      border: 1px solid rgba(100, 116, 139, 0.16);
+      box-shadow: 0 10px 22px rgba(59, 89, 152, 0.08);
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    #nextQuestionButton {
+      min-width: 156px;
+      padding: 13px 22px;
+      background: linear-gradient(135deg, #2563eb, #0ea5e9);
+      color: #fff;
+      border: 1px solid rgba(37, 99, 235, 0.16);
+      box-shadow: 0 14px 28px rgba(37, 99, 235, 0.24);
+      font-size: 1.06rem;
+      font-weight: 900;
+      letter-spacing: 0.02em;
+    }
+
+    #nextQuestionButton:not(:disabled) {
+      animation: nextButtonGlow 1.7s ease-in-out infinite;
+    }
+
+    #nextQuestionButton:disabled {
+      background: linear-gradient(135deg, #dbeafe, #e0f2fe);
+      color: #7c8da7;
+      border-color: rgba(148, 163, 184, 0.18);
+      box-shadow: none;
+      opacity: 0.92;
+    }
+
+    @keyframes nextButtonGlow {
+      0%, 100% {
+        transform: translateY(0);
+        box-shadow: 0 14px 28px rgba(37, 99, 235, 0.24);
+      }
+      50% {
+        transform: translateY(-1px);
+        box-shadow: 0 18px 34px rgba(14, 165, 233, 0.26);
+      }
+    }
+
+    .audio-status {
+      min-height: 1.5em;
+      margin: 0;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.6;
+      font-weight: 700;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .hero-tags span,
+    .mini-pill,
+    .sense-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 1rem;
+    }
+
+    .hero-tags span {
+      background: rgba(255, 255, 255, 0.76);
+      color: var(--teal);
+      border: 1px solid rgba(37, 99, 235, 0.14);
+    }
+
+    .lesson-section {
+      margin-top: 24px;
+      padding: 24px;
+    }
+
+    .lesson-section::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto auto 24px;
+      width: 104px;
+      height: 8px;
+      border-radius: 0 0 16px 16px;
+      background: linear-gradient(90deg, #60a5fa, #2563eb);
+      opacity: 0.9;
+    }
+
+    .playable-card {
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .playable-card.is-playing {
+      border-color: rgba(14, 165, 233, 0.34);
+      box-shadow: 0 24px 50px rgba(14, 165, 233, 0.18);
+      transform: translateY(-2px);
+    }
+
+    .playable-card.is-playing::after {
+      content: "";
+      position: absolute;
+      inset: auto 18px 18px auto;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #60a5fa, #2563eb);
+      box-shadow: 0 0 0 8px rgba(14, 165, 233, 0.12);
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .audio-chip {
+      min-width: 146px;
+      align-self: start;
+    }
+
+    .keyword-grid,
+    .qa-grid,
+    .example-grid,
+    .sense-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .keyword-grid {
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      margin-bottom: 20px;
+    }
+
+    .keyword-card,
+    .qa-card,
+    .example-card,
+    .sense-card,
+    .mini-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(100, 116, 139, 0.14);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: 0 14px 28px rgba(59, 89, 152, 0.08);
+    }
+
+    .keyword-card {
+      padding: 16px;
+      background:
+        radial-gradient(circle at top right, rgba(96, 165, 250, 0.16), transparent 34%),
+        rgba(255, 255, 255, 0.84);
+    }
+
+    .keyword-row {
+      display: block;
+    }
+
+    .keyword-en {
+      font-size: 1.45rem;
+      font-weight: 900;
+      color: #132238;
+      line-height: 1.25;
+    }
+
+    .keyword-zh {
+      margin-top: 6px;
+      font-size: 1.14rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .keyword-badge {
+      display: none;
+    }
+
+    .qa-grid,
+    .example-grid,
+    .sense-grid {
+      grid-template-columns: 1fr;
+      max-width: 100%;
+    }
+
+    [data-section-id="part1"] .qa-grid {
+      counter-reset: part1-question;
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+
+    .qa-card,
+    .example-card,
+    .sense-card {
+      padding: 24px 26px;
+      display: grid;
+      gap: 10px;
+      border-radius: 28px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(241, 247, 255, 0.94));
+      box-shadow: 0 14px 30px rgba(63, 103, 169, 0.08);
+    }
+
+    .qa-label,
+    .example-label,
+    .sense-label {
+      color: var(--orange);
+      font-size: 0.95rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .qa-en,
+    .example-en,
+    .sense-en {
+      font-size: 1.7rem;
+      line-height: 1.45;
+      color: var(--ink);
+      margin: 0;
+      font-weight: 900;
+    }
+
+    .qa-zh,
+    .example-zh,
+    .sense-zh {
+      font-size: 1.28rem;
+      line-height: 1.7;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .qa-answer {
+      margin-top: 6px;
+      padding-top: 14px;
+      border-top: 1px dashed rgba(96, 130, 182, 0.18);
+    }
+
+    .qa-answer .qa-en {
+      color: var(--berry);
+      font-weight: 800;
+    }
+
+    [data-section-id="part1"] .qa-card {
+      counter-increment: part1-question;
+      --q-badge-bg: #f97316;
+      --q-badge-color: #ffffff;
+      padding: 13px 16px;
+      gap: 6px;
+      border-radius: 22px;
+    }
+
+    [data-section-id="part1"] .qa-label {
+      display: none;
+    }
+
+    [data-section-id="part1"] .qa-card > .qa-en {
+      position: relative;
+      padding-left: 2.5rem;
+      font-size: 1.58rem;
+      line-height: 1.3;
+    }
+
+    [data-section-id="part1"] .qa-card > .qa-en::before {
+      content: counter(part1-question);
+      position: absolute;
+      left: 0;
+      top: 0.08rem;
+      width: 1.8rem;
+      height: 1.8rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: var(--q-badge-bg);
+      color: var(--q-badge-color);
+      font-size: 0.92rem;
+      font-weight: 900;
+    }
+
+    [data-section-id="part1"] .qa-card > .qa-zh {
+      padding-left: 2.5rem;
+      font-size: 1.16rem;
+      line-height: 1.48;
+      color: #5f7595;
+    }
+
+    [data-section-id="part1"] .qa-answer {
+      margin-top: 0;
+      padding: 9px 12px 9px 2.5rem;
+      border-top: 0;
+      border-radius: 16px;
+      background: rgba(239, 246, 255, 0.9);
+      border: 1px solid rgba(96, 165, 250, 0.18);
+    }
+
+    [data-section-id="part1"] .qa-answer .qa-en {
+      position: relative;
+      padding-left: 0;
+      font-size: 1.42rem;
+      line-height: 1.3;
+      color: #1e40af;
+    }
+
+    [data-section-id="part1"] .qa-answer .qa-en::before {
+      content: none;
+    }
+
+    [data-section-id="part1"] .qa-answer .qa-zh {
+      padding-left: 0;
+      font-size: 1.12rem;
+      line-height: 1.46;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .mini-card {
+      padding: 16px;
+      display: grid;
+      gap: 10px;
+      background:
+        radial-gradient(circle at bottom right, rgba(96, 165, 250, 0.14), transparent 34%),
+        rgba(255, 255, 255, 0.82);
+    }
+
+    .mini-card h3 {
+      font-size: 1.32rem;
+      line-height: 1.35;
+    }
+
+    .mini-pill {
+      justify-self: start;
+      background: rgba(255, 255, 255, 0.88);
+      color: var(--orange);
+      border: 1px solid rgba(37, 99, 235, 0.14);
+    }
+
+    .example-card {
+      background:
+        radial-gradient(circle at top right, rgba(96, 165, 250, 0.12), transparent 34%),
+        rgba(255, 255, 255, 0.82);
+    }
+
+    [data-section-id="part2"] .example-grid {
+      counter-reset: part2-example;
+    }
+
+    [data-section-id="part2"] .example-card {
+      counter-increment: part2-example;
+      --example-badge-bg: #14b8a6;
+      --example-badge-color: #ffffff;
+    }
+
+    [data-section-id="part2"] .example-label {
+      display: none;
+    }
+
+    [data-section-id="part2"] .example-en {
+      position: relative;
+      padding-left: 2.5rem;
+    }
+
+    [data-section-id="part2"] .example-en::before {
+      content: counter(part2-example);
+      position: absolute;
+      left: 0;
+      top: 0.08rem;
+      width: 1.8rem;
+      height: 1.8rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: var(--example-badge-bg);
+      color: var(--example-badge-color);
+      font-size: 0.92rem;
+      font-weight: 900;
+    }
+
+    [data-section-id="part2"] .example-zh {
+      padding-left: 2.5rem;
+    }
+
+    [data-section-id="part3"] .example-grid {
+      counter-reset: part3-example;
+    }
+
+    [data-section-id="part3"] .example-card {
+      counter-increment: part3-example;
+      --example-badge-bg: #8b5cf6;
+      --example-badge-color: #ffffff;
+    }
+
+    [data-section-id="part3"] .example-label {
+      display: block;
+      position: relative;
+      padding-left: 2.5rem;
+      color: var(--ink);
+      font-size: 1.18rem;
+      line-height: 1.3;
+      font-weight: 800;
+      letter-spacing: 0;
+      margin: 0;
+    }
+
+    [data-section-id="part3"] .example-label::before {
+      content: counter(part3-example);
+      position: absolute;
+      left: 0;
+      top: 0.02rem;
+      width: 1.8rem;
+      height: 1.8rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: var(--example-badge-bg);
+      color: var(--example-badge-color);
+      font-size: 0.92rem;
+      font-weight: 900;
+    }
+
+    [data-section-id="part3"] .example-en {
+      position: static;
+      padding-left: 0;
+    }
+
+    [data-section-id="part3"] .example-en::before {
+      content: none;
+    }
+
+    [data-section-id="part3"] .example-zh {
+      padding-left: 0;
+    }
+
+    .example-copy {
+      margin-bottom: 16px;
+    }
+
+    .sense-grid {
+      margin-top: 16px;
+    }
+
+    .sense-card {
+      background:
+        radial-gradient(circle at top right, rgba(59, 130, 246, 0.1), transparent 36%),
+        rgba(255, 255, 255, 0.82);
+    }
+
+    .sense-card h3 {
+      font-size: 1.56rem;
+      line-height: 1.3;
+    }
+
+    .sense-copy {
+      margin-bottom: 14px;
+    }
+
+    .sense-pill {
+      justify-self: start;
+      background: var(--berry-soft);
+      color: var(--berry);
+      border: 1px solid rgba(30, 64, 175, 0.12);
+    }
+
+    .game-card {
+      background:
+        radial-gradient(circle at top right, rgba(96, 165, 250, 0.14), transparent 30%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(239, 246, 255, 0.94));
+    }
+
+    .game-shell {
+      border: 1px solid rgba(100, 116, 139, 0.14);
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.82);
+      padding: 18px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.78);
+    }
+
+    .game-status-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .game-progress-copy {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.05rem;
+    }
+
+    .game-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 100px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(14, 165, 233, 0.12));
+      color: var(--teal);
+      font-size: 0.98rem;
+      font-weight: 900;
+    }
+
+    .game-score {
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(229, 240, 255, 0.92);
+      color: var(--orange);
+      font-weight: 900;
+      font-size: 1rem;
+    }
+
+    .game-progress {
+      width: 100%;
+      height: 14px;
+      border-radius: 999px;
+      background: rgba(226, 232, 240, 0.88);
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+
+    .game-progress span {
+      display: block;
+      height: 100%;
+      width: 0;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #93c5fd, #3b82f6, #1d4ed8);
+      transition: width 0.2s ease;
+    }
+
+    .game-question-card,
+    .game-result {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(100, 116, 139, 0.14);
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at top right, rgba(14, 165, 233, 0.08), transparent 36%),
+        rgba(255, 255, 255, 0.92);
+      padding: 22px;
+      box-shadow: 0 14px 28px rgba(59, 89, 152, 0.08);
+    }
+
+    .game-question-en {
+      margin: 0;
+      font-size: clamp(1.8rem, 3vw, 2.3rem);
+      line-height: 1.2;
+      font-weight: 900;
+      color: #132238;
+    }
+
+    .game-question-zh {
+      margin: 10px 0 0;
+      font-size: 1.24rem;
+      line-height: 1.7;
+      color: var(--muted);
+      transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+
+    .game-question-zh.is-hidden {
+      display: none;
+    }
+
+    .game-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .answer-btn {
+      position: relative;
+      overflow: hidden;
+      min-height: 86px;
+      padding: 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(100, 116, 139, 0.14);
+      background: rgba(255, 255, 255, 0.94);
+      color: var(--ink);
+      text-align: left;
+      font-size: 1.1rem;
+      font-weight: 800;
+      line-height: 1.55;
+      box-shadow: 0 10px 20px rgba(59, 89, 152, 0.06);
+    }
+
+    .answer-btn .choice-en,
+    .answer-btn .choice-zh {
+      display: block;
+    }
+
+    .answer-btn .choice-en {
+      font-size: 1.08rem;
+    }
+
+    .answer-btn .choice-zh {
+      margin-top: 4px;
+      font-size: 0.98rem;
+      color: var(--muted);
+      transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+
+    .answer-btn .choice-zh.is-hidden {
+      display: none;
+    }
+
+    .answer-btn.is-correct {
+      border: 3px solid #16a34a;
+      background: linear-gradient(180deg, rgba(240, 253, 244, 0.98), rgba(220, 252, 231, 0.96));
+      color: #166534;
+      box-shadow: 0 0 0 7px rgba(34, 197, 94, 0.24), 0 18px 30px rgba(22, 163, 74, 0.2);
+      transform: translateY(-2px) scale(1.01);
+    }
+
+    .answer-btn.is-wrong {
+      border: 3px solid #ea580c;
+      background: linear-gradient(180deg, rgba(255, 247, 237, 0.98), rgba(255, 237, 213, 0.96));
+      color: #9a3412;
+      box-shadow: 0 0 0 7px rgba(249, 115, 22, 0.22), 0 18px 28px rgba(249, 115, 22, 0.18);
+      transform: translateY(-2px) scale(1.01);
+      animation: answerShake 420ms ease;
+    }
+
+    .answer-btn.is-correct::after,
+    .answer-btn.is-wrong::after {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 32px;
+      height: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      font-size: 1.02rem;
+      font-weight: 900;
+      color: #fff;
+      box-shadow: 0 10px 18px rgba(15, 23, 42, 0.14);
+    }
+
+    .answer-btn.is-correct::after {
+      content: "✓";
+      background: #16a34a;
+    }
+
+    .answer-btn.is-wrong::after {
+      content: "✕";
+      background: #ea580c;
+    }
+
+    @keyframes answerShake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-4px); }
+      50% { transform: translateX(4px); }
+      75% { transform: translateX(-3px); }
+    }
+
+    .game-feedback {
+      min-height: 3.2em;
+      margin: 16px 0 0;
+      padding: 12px 14px;
+      border-radius: 18px;
+      border: 1px solid transparent;
+      background: rgba(255, 255, 255, 0.78);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .game-feedback strong {
+      display: inline-block;
+      margin-right: 4px;
+      font-size: 1.08rem;
+    }
+
+    .game-feedback.is-correct {
+      background: rgba(220, 252, 231, 0.9);
+      border-color: rgba(34, 197, 94, 0.22);
+      color: #166534;
+    }
+
+    .game-feedback.is-wrong {
+      background: rgba(255, 237, 213, 0.92);
+      border-color: rgba(249, 115, 22, 0.24);
+      color: #9a3412;
+    }
+
+    .confetti-layer {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .confetti-piece {
+      position: absolute;
+      top: -12%;
+      width: 12px;
+      height: 20px;
+      border-radius: 4px;
+      opacity: 0.95;
+      animation: confettiBurst 900ms cubic-bezier(.2,.8,.2,1) forwards;
+      transform-origin: center;
+    }
+
+    @keyframes confettiBurst {
+      0% {
+        transform: translate3d(0, 0, 0) rotate(0deg) scale(0.9);
+        opacity: 0;
+      }
+      18% {
+        opacity: 1;
+      }
+      100% {
+        transform: translate3d(var(--confetti-x, 0), var(--confetti-y, 240px), 0) rotate(var(--confetti-r, 180deg)) scale(1);
+        opacity: 0;
+      }
+    }
+
+    .game-controls {
+      margin-top: 16px;
+      justify-content: space-between;
+    }
+
+    .game-result {
+      display: grid;
+      gap: 12px;
+      text-align: center;
+      justify-items: center;
+    }
+
+    .game-result h3 {
+      font-size: clamp(2.2rem, 3.8vw, 3rem);
+      font-family: var(--head);
+    }
+
+    .game-result .big-score {
+      font-size: clamp(3.2rem, 6vw, 4.6rem);
+      font-weight: 900;
+      color: var(--orange);
+      line-height: 1;
+    }
+
+    .game-result p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.14rem;
+      line-height: 1.75;
+      max-width: 42rem;
+    }
+
+    .page-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 26px;
+      padding: 0 4px;
+    }
+
+    .footer-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 18px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #0f766e, #0284c7);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 800;
+      box-shadow: 0 12px 24px rgba(2, 132, 199, 0.2);
+    }
+
+    @media (max-width: 860px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .page {
+        width: min(100% - 18px, 100%);
+        padding-top: 18px;
+      }
+
+      .hero,
+      .lesson-section {
+        padding: 18px;
+        border-radius: 24px;
+      }
+
+      .game-shell,
+      .game-question-card {
+        padding: 16px;
+      }
+
+      .game-controls {
+        justify-content: flex-start;
+      }
+
+      [data-section-id="part1"] .keyword-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+
+      [data-section-id="part1"] .keyword-card {
+        padding: 13px 12px;
+        border-radius: 18px;
+      }
+
+      [data-section-id="part1"] .keyword-row {
+        display: block;
+      }
+
+      [data-section-id="part1"] .keyword-en {
+        font-size: 1.08rem;
+        line-height: 1.25;
+      }
+
+      [data-section-id="part1"] .keyword-zh {
+        margin-top: 4px;
+        font-size: 0.92rem;
+        line-height: 1.42;
+      }
+
+      [data-section-id="part1"] .keyword-badge {
+        display: none;
+      }
+
+      [data-section-id="part1"] .qa-grid {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+
+      [data-section-id="part1"] .qa-card {
+        padding: 12px 13px;
+        gap: 6px;
+        border-radius: 18px;
+      }
+
+      [data-section-id="part1"] .qa-label {
+        display: none;
+      }
+
+      [data-section-id="part1"] .qa-card > .qa-en {
+        padding-left: 2.2rem;
+        font-size: 1.32rem;
+        line-height: 1.3;
+      }
+
+      [data-section-id="part1"] .qa-card > .qa-en::before,
+      [data-section-id="part1"] .qa-answer .qa-en::before {
+        width: 1.6rem;
+        height: 1.6rem;
+        font-size: 0.82rem;
+      }
+
+      [data-section-id="part1"] .qa-card > .qa-zh {
+        padding-left: 2.2rem;
+        font-size: 1.05rem;
+        line-height: 1.42;
+      }
+
+      [data-section-id="part1"] .qa-answer {
+        padding: 8px 10px 8px 2.2rem;
+        border-radius: 14px;
+      }
+
+      [data-section-id="part1"] .qa-answer .qa-en {
+        padding-left: 0;
+        font-size: 1.2rem;
+        line-height: 1.3;
+      }
+
+      [data-section-id="part1"] .qa-answer .qa-zh {
+        padding-left: 0;
+        font-size: 1.02rem;
+        line-height: 1.4;
+      }
+
+      [data-section-id="part2"] .example-en {
+        padding-left: 2.2rem;
+      }
+
+      [data-section-id="part2"] .example-en::before {
+        width: 1.6rem;
+        height: 1.6rem;
+        font-size: 0.82rem;
+      }
+
+      [data-section-id="part2"] .example-zh {
+        padding-left: 2.2rem;
+      }
+
+      [data-section-id="part3"] .example-en {
+        padding-left: 0;
+      }
+
+      [data-section-id="part3"] .example-label {
+        padding-left: 2.2rem;
+        font-size: 1.06rem;
+      }
+
+      [data-section-id="part3"] .example-label::before {
+        width: 1.6rem;
+        height: 1.6rem;
+        font-size: 0.82rem;
+      }
+
+      [data-section-id="part3"] .example-en::before {
+        content: none;
+      }
+
+      [data-section-id="part3"] .example-zh {
+        padding-left: 0;
+      }
+
+      .page-footer {
+        padding-bottom: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page" id="pageTop">
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">TalkBetter Week 11</p>
+          <h1>Taste &amp; Senses</h1>
+          <p>練習味覺、<strong>then</strong>，還有感官句型。</p>
+        </div>
+        <div class="hero-panel">
+          <div class="hero-actions">
+            <button class="primary" id="playAllButton" type="button">播放全部</button>
+            <button class="secondary" id="stopButton" type="button">停止播放</button>
+          </div>
+          <p class="audio-status" id="audioStatus">正在偵測音檔…</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section playable-card" data-section-id="part1">
+      <div class="section-head">
+        <div>
+          <p class="section-kicker">Part 1</p>
+          <h2>🍎 Taste Talk</h2>
+          <p class="section-desc">先記住這週味覺關鍵字，再用問答句練習食物的味道。重點句型是 <strong>How does the ___ taste?</strong> 和 <strong>The ___ tastes ___.</strong></p>
+        </div>
+        <button class="audio-chip" data-action="section-play" data-section-id="part1" type="button">偵測中…</button>
+      </div>
+
+      <div class="keyword-grid">
+        <article class="keyword-card">
+          <div class="keyword-row">
+            <div class="keyword-en">smell</div>
+            <div class="keyword-badge">01</div>
+          </div>
+          <div class="keyword-zh">聞、氣味</div>
+        </article>
+        <article class="keyword-card">
+          <div class="keyword-row">
+            <div class="keyword-en">nose</div>
+            <div class="keyword-badge">02</div>
+          </div>
+          <div class="keyword-zh">鼻子</div>
+        </article>
+        <article class="keyword-card">
+          <div class="keyword-row">
+            <div class="keyword-en">sugar</div>
+            <div class="keyword-badge">03</div>
+          </div>
+          <div class="keyword-zh">糖</div>
+        </article>
+        <article class="keyword-card">
+          <div class="keyword-row">
+            <div class="keyword-en">spicy</div>
+            <div class="keyword-badge">04</div>
+          </div>
+          <div class="keyword-zh">辣的</div>
+        </article>
+        <article class="keyword-card">
+          <div class="keyword-row">
+            <div class="keyword-en">taste</div>
+            <div class="keyword-badge">05</div>
+          </div>
+          <div class="keyword-zh">味道、品嚐</div>
+        </article>
+        <article class="keyword-card">
+          <div class="keyword-row">
+            <div class="keyword-en">thirsty</div>
+            <div class="keyword-badge">06</div>
+          </div>
+          <div class="keyword-zh">口渴的</div>
+        </article>
+        <article class="keyword-card">
+          <div class="keyword-row">
+            <div class="keyword-en">tongue</div>
+            <div class="keyword-badge">07</div>
+          </div>
+          <div class="keyword-zh">舌頭</div>
+        </article>
+        <article class="keyword-card">
+          <div class="keyword-row">
+            <div class="keyword-en">sour</div>
+            <div class="keyword-badge">08</div>
+          </div>
+          <div class="keyword-zh">酸的</div>
+        </article>
+        <article class="keyword-card">
+          <div class="keyword-row">
+            <div class="keyword-en">sweet</div>
+            <div class="keyword-badge">09</div>
+          </div>
+          <div class="keyword-zh">甜的</div>
+        </article>
+        <article class="keyword-card">
+          <div class="keyword-row">
+            <div class="keyword-en">crunchy</div>
+            <div class="keyword-badge">10</div>
+          </div>
+          <div class="keyword-zh">酥脆的</div>
+        </article>
+      </div>
+
+      <div class="qa-grid">
+        <article class="qa-card">
+          <p class="qa-label">Question 1</p>
+          <p class="qa-en">How does the apple taste?</p>
+          <p class="qa-zh">蘋果吃起來怎麼樣？</p>
+          <div class="qa-answer">
+            <p class="qa-en">The apple tastes sweet and crunchy.</p>
+            <p class="qa-zh">蘋果吃起來又甜又脆。</p>
+          </div>
+        </article>
+        <article class="qa-card">
+          <p class="qa-label">Question 2</p>
+          <p class="qa-en">How does the lemon taste?</p>
+          <p class="qa-zh">檸檬吃起來怎麼樣？</p>
+          <div class="qa-answer">
+            <p class="qa-en">The lemon tastes sour.</p>
+            <p class="qa-zh">檸檬吃起來很酸。</p>
+          </div>
+        </article>
+        <article class="qa-card">
+          <p class="qa-label">Question 3</p>
+          <p class="qa-en">How does the candy taste?</p>
+          <p class="qa-zh">糖果吃起來怎麼樣？</p>
+          <div class="qa-answer">
+            <p class="qa-en">The candy tastes sweet.</p>
+            <p class="qa-zh">糖果吃起來很甜。</p>
+          </div>
+        </article>
+        <article class="qa-card">
+          <p class="qa-label">Question 4</p>
+          <p class="qa-en">How does the soup taste?</p>
+          <p class="qa-zh">湯吃起來怎麼樣？</p>
+          <div class="qa-answer">
+            <p class="qa-en">The soup tastes spicy.</p>
+            <p class="qa-zh">湯吃起來很辣。</p>
+          </div>
+        </article>
+        <article class="qa-card">
+          <p class="qa-label">Question 5</p>
+          <p class="qa-en">How does the cookie taste?</p>
+          <p class="qa-zh">餅乾吃起來怎麼樣？</p>
+          <div class="qa-answer">
+            <p class="qa-en">The cookie tastes sweet and crunchy.</p>
+            <p class="qa-zh">餅乾吃起來又甜又脆。</p>
+          </div>
+        </article>
+        <article class="qa-card">
+          <p class="qa-label">Question 6</p>
+          <p class="qa-en">How does the popcorn taste?</p>
+          <p class="qa-zh">爆米花吃起來怎麼樣？</p>
+          <div class="qa-answer">
+            <p class="qa-en">The popcorn tastes crunchy.</p>
+            <p class="qa-zh">爆米花吃起來很脆。</p>
+          </div>
+        </article>
+        <article class="qa-card">
+          <p class="qa-label">Question 7</p>
+          <p class="qa-en">How does the orange taste?</p>
+          <p class="qa-zh">柳橙吃起來怎麼樣？</p>
+          <div class="qa-answer">
+            <p class="qa-en">The orange tastes sweet and sour.</p>
+            <p class="qa-zh">柳橙吃起來又甜又酸。</p>
+          </div>
+        </article>
+        <article class="qa-card">
+          <p class="qa-label">Question 8</p>
+          <p class="qa-en">How does the hot sauce taste?</p>
+          <p class="qa-zh">辣醬吃起來怎麼樣？</p>
+          <div class="qa-answer">
+            <p class="qa-en">The hot sauce tastes spicy.</p>
+            <p class="qa-zh">辣醬吃起來很辣。</p>
+          </div>
+        </article>
+        <article class="qa-card">
+          <p class="qa-label">Question 9</p>
+          <p class="qa-en">How does the yogurt taste?</p>
+          <p class="qa-zh">優格吃起來怎麼樣？</p>
+          <div class="qa-answer">
+            <p class="qa-en">The yogurt tastes sour.</p>
+            <p class="qa-zh">優格吃起來很酸。</p>
+          </div>
+        </article>
+        <article class="qa-card">
+          <p class="qa-label">Question 10</p>
+          <p class="qa-en">How does the chip taste?</p>
+          <p class="qa-zh">洋芋片吃起來怎麼樣？</p>
+          <div class="qa-answer">
+            <p class="qa-en">The chip tastes crunchy.</p>
+            <p class="qa-zh">洋芋片吃起來很脆。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="lesson-section playable-card" data-section-id="part2">
+      <div class="section-head">
+        <div>
+          <p class="section-kicker">Part 2</p>
+          <h2>⏭️ 文法重點 Then</h2>
+          <p class="section-desc">`then` 用來連接兩個有順序的動作。</p>
+        </div>
+        <button class="audio-chip" data-action="section-play" data-section-id="part2" type="button">偵測中…</button>
+      </div>
+
+      <div class="mini-grid">
+        <article class="mini-card">
+          <h3>then = 然後</h3>
+          <p class="mini-copy">表示接下來。</p>
+        </article>
+        <article class="mini-card">
+          <h3>先做一件事</h3>
+          <p class="mini-copy">先說第一件事，再說第二件事。</p>
+        </article>
+        <article class="mini-card">
+          <h3>核心句型</h3>
+          <p class="mini-copy">第一件事 + then + 第二件事。</p>
+        </article>
+      </div>
+
+      <p class="example-copy">看下面例句。</p>
+      <div class="example-grid">
+        <article class="example-card">
+          <p class="example-label">Example 1</p>
+          <p class="example-en">We ate lunch, then we played outside.</p>
+          <p class="example-zh">我們吃了午餐，然後去外面玩。</p>
+        </article>
+        <article class="example-card">
+          <p class="example-label">Example 2</p>
+          <p class="example-en">We went to the park, then we had lunch.</p>
+          <p class="example-zh">我們去了公園，然後我們吃午餐。</p>
+        </article>
+        <article class="example-card">
+          <p class="example-label">Example 3</p>
+          <p class="example-en">She played soccer, then she drank water.</p>
+          <p class="example-zh">她踢了足球，然後她喝水。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="lesson-section playable-card" data-section-id="part3">
+      <div class="section-head">
+        <div>
+          <p class="section-kicker">Part 3</p>
+          <h2>🖐️ Our Senses 我們的感官</h2>
+        </div>
+        <button class="audio-chip" data-action="section-play" data-section-id="part3" type="button">偵測中…</button>
+      </div>
+
+      <div class="example-grid">
+        <article class="example-card">
+          <p class="example-label">carries 拿、提、搬、帶</p>
+          <p class="example-en">My dad carries a heavy bag.</p>
+          <p class="example-zh">我爸爸提著一個很重的袋子。</p>
+        </article>
+        <article class="example-card">
+          <p class="example-label">bitter 苦的</p>
+          <p class="example-en">My mom drinks bitter coffee.</p>
+          <p class="example-zh">我媽媽喝苦咖啡。</p>
+        </article>
+        <article class="example-card">
+          <p class="example-label">small bumps 小小的凸起</p>
+          <p class="example-en">I touch the wall and feel small bumps.</p>
+          <p class="example-zh">我摸著牆，感覺到小小的凸起。</p>
+        </article>
+        <article class="example-card">
+          <p class="example-label">scratchy 刺刺的</p>
+          <p class="example-en">This sweater feels scratchy.</p>
+          <p class="example-zh">這件毛衣摸起來刺刺的。</p>
+        </article>
+        <article class="example-card">
+          <p class="example-label">taste buds 味蕾</p>
+          <p class="example-en">Taste buds help us taste food.</p>
+          <p class="example-zh">味蕾幫助我們品嚐食物。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="lesson-section playable-card game-card" data-section-id="part4">
+      <div class="section-head">
+        <div>
+          <p class="section-kicker">Part 4</p>
+          <h2>🎮 Taste Detective Challenge</h2>
+        </div>
+      </div>
+
+      <div class="game-shell">
+        <div class="game-status-row">
+          <div class="game-progress-copy">
+            <span class="game-badge" id="gameCategory">Taste</span>
+            <strong id="gameCounter">Round 1 / 1</strong>
+          </div>
+          <div class="game-score" id="gameScore">0 分</div>
+        </div>
+        <div class="game-progress">
+          <span id="gameProgressBar"></span>
+        </div>
+
+        <div id="gameBody">
+          <article class="game-question-card">
+            <p class="game-question-en" id="gamePromptEn">Loading...</p>
+            <p class="game-question-zh" id="gamePromptZh"></p>
+            <div class="game-options" id="gameOptions"></div>
+            <p class="game-feedback" id="gameFeedback">選一個答案開始挑戰。</p>
+          </article>
+        </div>
+
+        <div class="game-controls">
+          <button class="ghost" id="nextQuestionButton" type="button" disabled>下一題</button>
+          <button class="secondary" id="resetGameButton" type="button">重新開始</button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="page-footer">
+      <a class="footer-link" href="https://talkbetter.github.io/D/">返回首頁</a>
+      <div class="footer-actions">
+        <button class="ghost" id="backToTopButton" type="button">回到上方</button>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    const sections = [
+      { id: "part1", label: "Part 1", file: "01-part1-taste-talk.mp3" },
+      { id: "part2", label: "Part 2", file: "02-part2-then.mp3" },
+      { id: "part3", label: "Part 3", file: "03-part3-sense-lab.mp3" }
+    ];
+
+    const sectionMap = new Map(sections.map((section) => [section.id, section]));
+    const availability = new Map();
+    const player = new Audio();
+    player.preload = "metadata";
+
+    const playAllButton = document.getElementById("playAllButton");
+    const stopButton = document.getElementById("stopButton");
+    const audioStatus = document.getElementById("audioStatus");
+    const backToTopButton = document.getElementById("backToTopButton");
+
+    const cardNodes = new Map(
+      Array.from(document.querySelectorAll(".playable-card")).map((node) => [node.dataset.sectionId, node])
+    );
+    const buttonNodes = new Map(
+      Array.from(document.querySelectorAll("[data-action='section-play']")).map((node) => [node.dataset.sectionId, node])
+    );
+
+    let currentSectionId = null;
+    let playAllMode = false;
+    let queue = [];
+    let queueIndex = -1;
+
+    function getSource(section) {
+      return `audio/${section.file}`;
+    }
+
+    function readySections() {
+      return sections.filter((section) => availability.get(section.id));
+    }
+
+    function clearPlayingState(sectionId) {
+      const card = cardNodes.get(sectionId);
+      if (card) card.classList.remove("is-playing");
+    }
+
+    function setPlayingState(sectionId) {
+      const card = cardNodes.get(sectionId);
+      if (card) card.classList.add("is-playing");
+    }
+
+    function renderAudioStatus(message = "") {
+      if (message) {
+        audioStatus.textContent = message;
+        return;
+      }
+
+      const ready = readySections().length;
+      if (ready === 0) {
+        audioStatus.textContent = "尚未找到對應音檔。請把 MP3 放進 audio/ 資料夾。";
+        return;
+      }
+
+      audioStatus.textContent = `已找到 ${ready} / ${sections.length} 個音檔。`;
+    }
+
+    function updateButtons() {
+      sections.forEach((section) => {
+        const button = buttonNodes.get(section.id);
+        if (!button) return;
+
+        const isReady = availability.get(section.id);
+        const isCurrent = currentSectionId === section.id;
+
+        button.disabled = !isReady;
+        if (!isReady) {
+          button.textContent = "等待音檔";
+        } else if (isCurrent && !player.paused) {
+          button.textContent = `暫停 ${section.label}`;
+        } else if (isCurrent && player.paused) {
+          button.textContent = `繼續 ${section.label}`;
+        } else {
+          button.textContent = `播放 ${section.label}`;
+        }
+      });
+
+      playAllButton.disabled = readySections().length === 0;
+      stopButton.disabled = !currentSectionId && !playAllMode;
+    }
+
+    function resetQueue() {
+      playAllMode = false;
+      queue = [];
+      queueIndex = -1;
+    }
+
+    function stopPlayback(resetAll = true, message = "已停止播放。") {
+      player.pause();
+      player.removeAttribute("src");
+      player.load();
+
+      if (currentSectionId) clearPlayingState(currentSectionId);
+      currentSectionId = null;
+
+      if (resetAll) resetQueue();
+
+      renderAudioStatus(message);
+      updateButtons();
+    }
+
+    function onPlaybackError(section) {
+      clearPlayingState(section.id);
+      currentSectionId = null;
+      availability.set(section.id, false);
+      updateButtons();
+
+      if (playAllMode) {
+        queueIndex += 1;
+        playQueuedSection();
+        return;
+      }
+
+      renderAudioStatus(`找不到 ${section.file}，請檢查 audio/ 內的檔名。`);
+    }
+
+    function startPlayback(section, fromQueue = false) {
+      const source = getSource(section);
+      if (!availability.get(section.id)) {
+        renderAudioStatus(`尚未找到 ${section.file}。`);
+        return false;
+      }
+
+      if (currentSectionId && currentSectionId !== section.id) {
+        clearPlayingState(currentSectionId);
+      }
+
+      currentSectionId = section.id;
+      setPlayingState(section.id);
+      player.pause();
+      player.src = source;
+      player.currentTime = 0;
+
+      const playPromise = player.play();
+      if (playPromise && typeof playPromise.catch === "function") {
+        playPromise.catch((error) => {
+          if (error && error.name === "AbortError") return;
+          onPlaybackError(section);
+        });
+      }
+
+      renderAudioStatus(fromQueue ? `依序播放 ${section.label}。` : `正在播放 ${section.label}。`);
+      updateButtons();
+      return true;
+    }
+
+    function resumePlayback(section) {
+      if (!section || currentSectionId !== section.id) return;
+      setPlayingState(section.id);
+
+      const playPromise = player.play();
+      if (playPromise && typeof playPromise.catch === "function") {
+        playPromise.catch((error) => {
+          if (error && error.name === "AbortError") return;
+          onPlaybackError(section);
+        });
+      }
+
+      renderAudioStatus(`繼續播放 ${section.label}。`);
+      updateButtons();
+    }
+
+    function toggleSectionPlayback(sectionId) {
+      const section = sectionMap.get(sectionId);
+      if (!section || !availability.get(section.id)) return;
+
+      if (currentSectionId === sectionId) {
+        if (player.paused) {
+          resumePlayback(section);
+        } else {
+          player.pause();
+          clearPlayingState(section.id);
+          renderAudioStatus(`已暫停 ${section.label}。`);
+          updateButtons();
+        }
+        return;
+      }
+
+      resetQueue();
+      startPlayback(section, false);
+    }
+
+    function playQueuedSection() {
+      if (queueIndex >= queue.length) {
+        stopPlayback(true, "全部播放完成。");
+        return;
+      }
+
+      const nextId = queue[queueIndex];
+      const nextSection = sectionMap.get(nextId);
+
+      if (!nextSection || !availability.get(nextSection.id)) {
+        queueIndex += 1;
+        playQueuedSection();
+        return;
+      }
+
+      startPlayback(nextSection, true);
+    }
+
+    function playAllSections() {
+      const ready = readySections();
+      if (!ready.length) {
+        renderAudioStatus("沒有可播放的音檔。");
+        return;
+      }
+
+      stopPlayback(false, "");
+      playAllMode = true;
+      queue = ready.map((section) => section.id);
+      queueIndex = 0;
+      playQueuedSection();
+    }
+
+    function probeAudioSource(path) {
+      return new Promise((resolve) => {
+        const probe = new Audio();
+        let done = false;
+
+        const finish = (value) => {
+          if (done) return;
+          done = true;
+          probe.pause();
+          probe.removeAttribute("src");
+          probe.load();
+          resolve(value);
+        };
+
+        probe.preload = "metadata";
+        probe.addEventListener("loadedmetadata", () => finish(true), { once: true });
+        probe.addEventListener("canplaythrough", () => finish(true), { once: true });
+        probe.addEventListener("error", () => finish(false), { once: true });
+        probe.src = path;
+        probe.load();
+        window.setTimeout(() => finish(false), 1600);
+      });
+    }
+
+    async function detectAudio() {
+      await Promise.all(sections.map(async (section) => {
+        const ok = await probeAudioSource(getSource(section));
+        availability.set(section.id, ok);
+      }));
+
+      renderAudioStatus();
+      updateButtons();
+    }
+
+    playAllButton.addEventListener("click", playAllSections);
+    stopButton.addEventListener("click", () => stopPlayback(true, "已停止播放。"));
+    backToTopButton.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    buttonNodes.forEach((button, sectionId) => {
+      button.addEventListener("click", () => toggleSectionPlayback(sectionId));
+    });
+
+    player.addEventListener("ended", () => {
+      if (currentSectionId) clearPlayingState(currentSectionId);
+
+      if (playAllMode) {
+        currentSectionId = null;
+        queueIndex += 1;
+        playQueuedSection();
+        return;
+      }
+
+      const finishedSection = currentSectionId ? sectionMap.get(currentSectionId) : null;
+      currentSectionId = null;
+      renderAudioStatus(finishedSection ? `${finishedSection.label} 播放完成。` : "播放完成。");
+      updateButtons();
+    });
+
+    player.addEventListener("error", () => {
+      const section = currentSectionId ? sectionMap.get(currentSectionId) : null;
+      if (!section) {
+        renderAudioStatus("播放失敗，請檢查音檔。");
+        return;
+      }
+      onPlaybackError(section);
+    });
+
+    const gameBody = document.getElementById("gameBody");
+    const gameCategory = document.getElementById("gameCategory");
+    const gameCounter = document.getElementById("gameCounter");
+    const gameScore = document.getElementById("gameScore");
+    const gameProgressBar = document.getElementById("gameProgressBar");
+    const nextQuestionButton = document.getElementById("nextQuestionButton");
+    const resetGameButton = document.getElementById("resetGameButton");
+
+    const gameQuestions = [
+      {
+        category: "Taste",
+        promptEn: "How does the apple taste?",
+        promptZh: "蘋果吃起來怎麼樣？",
+        choices: [
+          { key: "sweet-and-crunchy", label: "sweet and crunchy / 又甜又脆" },
+          { key: "sour", label: "sour / 酸的" },
+          { key: "spicy", label: "spicy / 辣的" }
+        ],
+        answer: "sweet-and-crunchy",
+        feedback: "The apple tastes sweet and crunchy. 蘋果吃起來又甜又脆。"
+      },
+      {
+        category: "Taste",
+        promptEn: "How does the lemon taste?",
+        promptZh: "檸檬吃起來怎麼樣？",
+        choices: [
+          { key: "sweet", label: "sweet / 甜的" },
+          { key: "sour", label: "sour / 酸的" },
+          { key: "crunchy", label: "crunchy / 酥脆的" }
+        ],
+        answer: "sour",
+        feedback: "The lemon tastes sour. 檸檬吃起來很酸。"
+      },
+      {
+        category: "Taste",
+        promptEn: "How does the orange taste?",
+        promptZh: "柳橙吃起來怎麼樣？",
+        choices: [
+          { key: "sweet-and-sour", label: "sweet and sour / 又甜又酸" },
+          { key: "crunchy", label: "crunchy / 酥脆的" },
+          { key: "spicy", label: "spicy / 辣的" }
+        ],
+        answer: "sweet-and-sour",
+        feedback: "The orange tastes sweet and sour. 柳橙吃起來又甜又酸。"
+      },
+      {
+        category: "Taste",
+        promptEn: "How does the popcorn taste?",
+        promptZh: "爆米花吃起來怎麼樣？",
+        choices: [
+          { key: "crunchy", label: "crunchy / 酥脆的" },
+          { key: "sour", label: "sour / 酸的" },
+          { key: "spicy", label: "spicy / 辣的" }
+        ],
+        answer: "crunchy",
+        feedback: "In this lesson, the popcorn tastes crunchy. 這課裡，爆米花吃起來很脆。"
+      },
+      {
+        category: "Taste",
+        promptEn: "How does the yogurt taste?",
+        promptZh: "優格吃起來怎麼樣？",
+        choices: [
+          { key: "sour", label: "sour / 酸的" },
+          { key: "spicy", label: "spicy / 辣的" },
+          { key: "sweet-and-crunchy", label: "sweet and crunchy / 又甜又脆" }
+        ],
+        answer: "sour",
+        feedback: "The yogurt tastes sour. 優格吃起來很酸。"
+      },
+      {
+        category: "Then",
+        promptEn: "We ate lunch, ___ we played outside.",
+        promptZh: "我們吃了午餐，然後去外面玩。",
+        choices: [
+          { key: "then", label: "then / 然後" },
+          { key: "but", label: "but / 但是" },
+          { key: "because", label: "because / 因為" }
+        ],
+        answer: "then",
+        feedback: "Use then to show what happens next. 用 then 來表示接下來的動作。"
+      },
+      {
+        category: "Then",
+        promptEn: "We went to the park, ___ we had lunch.",
+        promptZh: "我們去了公園，然後我們吃午餐。",
+        choices: [
+          { key: "then", label: "then / 然後" },
+          { key: "or", label: "or / 或者" },
+          { key: "so", label: "so / 所以" }
+        ],
+        answer: "then",
+        feedback: "then connects the first action and the next action. then 把前後兩件事連起來。"
+      },
+      {
+        category: "Then",
+        promptEn: "She played soccer, ___ she drank water.",
+        promptZh: "她踢了足球，然後她喝水。",
+        choices: [
+          { key: "then", label: "then / 然後" },
+          { key: "before", label: "before / 在…之前" },
+          { key: "if", label: "if / 如果" }
+        ],
+        answer: "then",
+        feedback: "After soccer comes drinking water, so we use then. 踢完足球再喝水，所以用 then。"
+      },
+      {
+        category: "Sense",
+        promptEn: "My dad _____ a heavy bag.",
+        promptZh: "我爸爸提著一個很重的袋子。",
+        choices: [
+          { key: "carries", label: "carries / 拿、提、搬、帶" },
+          { key: "tastes", label: "tastes / 品嚐" },
+          { key: "smells", label: "smells / 聞" }
+        ],
+        answer: "carries",
+        feedback: "My dad carries a heavy bag. carries 是拿、提、搬、帶。"
+      },
+      {
+        category: "Sense",
+        promptEn: "My mom drinks _____ coffee.",
+        promptZh: "我媽媽喝苦咖啡。",
+        choices: [
+          { key: "bitter", label: "bitter / 苦的" },
+          { key: "sweet", label: "sweet / 甜的" },
+          { key: "sour", label: "sour / 酸的" }
+        ],
+        answer: "bitter",
+        feedback: "Bitter coffee is coffee that tastes bitter. bitter 是苦的。"
+      },
+      {
+        category: "Sense",
+        promptEn: "I touch the wall and feel small _____.",
+        promptZh: "我摸著牆，感覺到小小的凸起。",
+        choices: [
+          { key: "bumps", label: "bumps / 凸起" },
+          { key: "tongues", label: "tongues / 舌頭" },
+          { key: "bags", label: "bags / 袋子" }
+        ],
+        answer: "bumps",
+        feedback: "The wall has small bumps. bumps 是小小的凸起。"
+      },
+      {
+        category: "Sense",
+        promptEn: "This sweater feels _____.",
+        promptZh: "這件毛衣摸起來刺刺的。",
+        choices: [
+          { key: "scratchy", label: "scratchy / 刺刺的" },
+          { key: "crunchy", label: "crunchy / 酥脆的" },
+          { key: "thirsty", label: "thirsty / 口渴的" }
+        ],
+        answer: "scratchy",
+        feedback: "This sweater feels scratchy. scratchy 是摸起來刺刺的。"
+      },
+      {
+        category: "Sense",
+        promptEn: "Taste buds help us _____ food.",
+        promptZh: "味蕾幫助我們品嚐食物。",
+        choices: [
+          { key: "taste", label: "taste / 品嚐" },
+          { key: "carry", label: "carry / 提、拿" },
+          { key: "drink", label: "drink / 喝" }
+        ],
+        answer: "taste",
+        feedback: "Taste buds help us taste food. 味蕾幫助我們品嚐食物。"
+      }
+    ];
+
+    let shuffledQuestions = [];
+    let questionIndex = 0;
+    let score = 0;
+    let questionLocked = false;
+
+    function shuffleArray(items) {
+      const result = [...items];
+      for (let i = result.length - 1; i > 0; i -= 1) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [result[i], result[j]] = [result[j], result[i]];
+      }
+      return result;
+    }
+
+    function updateGameStatus() {
+      const total = shuffledQuestions.length;
+      gameScore.textContent = `${score} / ${total} 分`;
+
+      if (questionIndex >= total) {
+        gameCategory.textContent = "Finish";
+        gameCounter.textContent = `Round ${total} / ${total}`;
+        gameProgressBar.style.width = "100%";
+        return;
+      }
+
+      const current = shuffledQuestions[questionIndex];
+      const completed = questionIndex + (questionLocked ? 1 : 0);
+      gameCategory.textContent = current.category;
+      gameCounter.textContent = `Round ${questionIndex + 1} / ${total}`;
+      gameProgressBar.style.width = `${(completed / total) * 100}%`;
+    }
+
+    function renderResult() {
+      const total = shuffledQuestions.length;
+      const percent = Math.round((score / total) * 100);
+      let message = "再玩一次，把句型和單字念得更穩。";
+
+      if (percent === 100) {
+        message = "你是 Taste Detective Master。味覺句型、then 和感官單字都很穩。";
+      } else if (percent >= 80) {
+        message = "表現很強，已經能快速辨認大部分內容。";
+      } else if (percent >= 60) {
+        message = "基礎抓到了，再複習幾題就會更順。";
+      }
+
+      gameBody.innerHTML = `
+        <article class="game-result">
+          <h3>Great Job</h3>
+          <div class="big-score">${score} / ${total}</div>
+          <p>${message}</p>
+        </article>
+      `;
+
+      nextQuestionButton.disabled = true;
+      updateGameStatus();
+    }
+
+    function revealGameTranslation() {
+      const translation = document.getElementById("gamePromptZh");
+      if (!translation) return;
+      translation.classList.remove("is-hidden");
+    }
+
+    function burstConfetti() {
+      const card = gameBody.querySelector(".game-question-card");
+      if (!card) return;
+
+      const oldLayer = card.querySelector(".confetti-layer");
+      if (oldLayer) oldLayer.remove();
+
+      const layer = document.createElement("div");
+      layer.className = "confetti-layer";
+
+      const colors = ["#f97316", "#22c55e", "#3b82f6", "#8b5cf6", "#facc15", "#14b8a6"];
+      const pieceCount = 18;
+
+      for (let index = 0; index < pieceCount; index += 1) {
+        const piece = document.createElement("span");
+        const left = 8 + (index * 84) / pieceCount + Math.random() * 8;
+        const x = (Math.random() - 0.5) * 260;
+        const y = 160 + Math.random() * 120;
+        const rotation = (Math.random() - 0.5) * 520;
+        const delay = Math.random() * 120;
+
+        piece.className = "confetti-piece";
+        piece.style.left = `${left}%`;
+        piece.style.background = colors[index % colors.length];
+        piece.style.setProperty("--confetti-x", `${x}px`);
+        piece.style.setProperty("--confetti-y", `${y}px`);
+        piece.style.setProperty("--confetti-r", `${rotation}deg`);
+        piece.style.animationDelay = `${delay}ms`;
+        layer.appendChild(piece);
+      }
+
+      card.appendChild(layer);
+      window.setTimeout(() => {
+        layer.remove();
+      }, 1200);
+    }
+
+    function revealChoiceTranslations() {
+      document.querySelectorAll(".choice-zh.is-hidden").forEach((node) => {
+        node.classList.remove("is-hidden");
+      });
+    }
+
+    function getChoiceParts(choice) {
+      const [en, zh = ""] = String(choice.label).split(" / ");
+      return { en, zh };
+    }
+
+    function handleAnswer(selectedKey) {
+      if (questionLocked) return;
+      questionLocked = true;
+
+      const current = shuffledQuestions[questionIndex];
+      const buttons = Array.from(document.querySelectorAll(".answer-btn"));
+      const correct = current.answer === selectedKey;
+      const correctChoice = current.choices.find((choice) => choice.key === current.answer);
+      const correctChoiceParts = correctChoice ? getChoiceParts(correctChoice) : { en: "", zh: "" };
+
+      if (correct) score += 1;
+
+      buttons.forEach((button) => {
+        const isCorrect = button.dataset.key === current.answer;
+        const isSelected = button.dataset.key === selectedKey;
+        button.disabled = true;
+
+        if (isCorrect) button.classList.add("is-correct");
+        if (isSelected && !isCorrect) button.classList.add("is-wrong");
+      });
+
+      revealGameTranslation();
+      revealChoiceTranslations();
+
+      const feedback = document.getElementById("gameFeedback");
+      feedback.classList.remove("is-correct", "is-wrong");
+
+      if (correct) {
+        feedback.classList.add("is-correct");
+        feedback.innerHTML = `<strong>答對了！</strong>${current.feedback}`;
+      } else {
+        feedback.classList.add("is-wrong");
+        feedback.innerHTML = `<strong>答錯了。</strong>正確答案是 ${correctChoiceParts.en}${correctChoiceParts.zh ? ` / ${correctChoiceParts.zh}` : ""}。 ${current.feedback}`;
+      }
+
+      if (correct) {
+        burstConfetti();
+      }
+
+      updateGameStatus();
+      nextQuestionButton.disabled = false;
+    }
+
+    function renderQuestion() {
+      if (questionIndex >= shuffledQuestions.length) {
+        renderResult();
+        return;
+      }
+
+      questionLocked = false;
+      nextQuestionButton.disabled = true;
+
+      const current = shuffledQuestions[questionIndex];
+      const choices = shuffleArray(current.choices);
+
+      gameBody.innerHTML = `
+        <article class="game-question-card">
+          <p class="game-question-en" id="gamePromptEn">${current.promptEn}</p>
+          <p class="game-question-zh is-hidden" id="gamePromptZh">${current.promptZh}</p>
+          <div class="game-options" id="gameOptions">
+            ${choices.map((choice) => `
+              ${(() => {
+                const choiceParts = getChoiceParts(choice);
+                return `
+              <button class="answer-btn" type="button" data-key="${choice.key}">
+                <span class="choice-en">${choiceParts.en}</span>
+                <span class="choice-zh is-hidden">${choiceParts.zh}</span>
+              </button>
+            `;
+              })()}
+            `).join("")}
+          </div>
+          <p class="game-feedback" id="gameFeedback">選一個答案開始挑戰。</p>
+        </article>
+      `;
+
+      document.querySelectorAll(".answer-btn").forEach((button) => {
+        button.addEventListener("click", () => handleAnswer(button.dataset.key));
+      });
+
+      updateGameStatus();
+    }
+
+    function nextQuestion() {
+      if (!questionLocked) return;
+      questionIndex += 1;
+      renderQuestion();
+    }
+
+    function resetGame() {
+      shuffledQuestions = shuffleArray(gameQuestions);
+      questionIndex = 0;
+      score = 0;
+      questionLocked = false;
+      updateGameStatus();
+      renderQuestion();
+    }
+
+    nextQuestionButton.addEventListener("click", nextQuestion);
+    resetGameButton.addEventListener("click", resetGame);
+
+    updateButtons();
+    detectAudio();
+    resetGame();
+  </script>
+</body>
+</html>
