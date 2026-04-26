@@ -1295,7 +1295,17 @@
   /* Pointer (mouse + finger drag + stylus) — works on every device */
   function bindPointer() {
     const stage = document.getElementById("game-stage");
+    const mobileControlsEl = document.querySelector(".mobile-controls");
     const isUIElement = (el) => !!(el && (el.closest("button") || el.closest("a") || el.closest(".overlay")));
+
+    // The bottom button strip (FIRE / ◀ / ▶) — touches inside this area must NEVER drag the ship.
+    function isInButtonZone(e) {
+      if (!mobileControlsEl) return false;
+      if (getComputedStyle(mobileControlsEl).display === "none") return false;
+      const rect = mobileControlsEl.getBoundingClientRect();
+      const padding = 14;                 // small buffer above the strip so fingers near buttons don't drag either
+      return e.clientY >= rect.top - padding;
+    }
 
     let activeTouchId = null;
 
@@ -1307,6 +1317,7 @@
     stage.addEventListener("pointermove", (e) => {
       if (State.status !== "playing") return;
       if (isUIElement(e.target)) return;
+      if (e.pointerType !== "mouse" && isInButtonZone(e)) return;   // ignore touch inside button strip
       // Mouse: hover to aim. Touch/pen: only follow when actively pressing.
       if (e.pointerType === "mouse" || e.pointerId === activeTouchId) {
         Player.targetX = getStageX(e);
@@ -1316,6 +1327,7 @@
     stage.addEventListener("pointerdown", (e) => {
       if (State.status !== "playing") return;
       if (isUIElement(e.target)) return;
+      if (e.pointerType !== "mouse" && isInButtonZone(e)) return;   // ignore touch inside button strip
       e.preventDefault();
       Player.targetX = getStageX(e);
       if (e.pointerType === "mouse") {
