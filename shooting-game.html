@@ -430,6 +430,121 @@
     .flash-correct { color: var(--neon-green); }
     .flash-wrong { color: var(--neon-red); }
 
+    /* Leaderboard inside game-over overlay */
+    .submit-block {
+      margin: 16px 0;
+      padding: 14px;
+      background: rgba(0, 0, 0, 0.28);
+      border-radius: 14px;
+      border: 1px solid var(--panel-border);
+    }
+    .submit-block h3 {
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      color: var(--neon-cyan);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      text-align: left;
+    }
+    .submit-row {
+      display: flex;
+      gap: 8px;
+    }
+    .name-input {
+      flex: 1;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--panel-border);
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-soft);
+      font-size: 15px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.15s ease;
+    }
+    .name-input:focus {
+      border-color: var(--neon-cyan);
+    }
+    .submit-btn {
+      padding: 12px 18px;
+      border-radius: 10px;
+      border: none;
+      background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+      color: #0a0e27;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+    .submit-btn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+    .submit-status {
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--text-dim);
+      min-height: 16px;
+      text-align: left;
+    }
+    .submit-status.ok { color: var(--neon-green); }
+    .submit-status.err { color: var(--neon-red); }
+    .leaderboard-list {
+      list-style: none;
+      max-height: 240px;
+      overflow-y: auto;
+      padding: 0;
+      margin: 8px 0 0;
+    }
+    .leaderboard-list li {
+      display: grid;
+      grid-template-columns: 36px 1fr auto;
+      gap: 10px;
+      align-items: center;
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    .leaderboard-list li + li { margin-top: 2px; }
+    .leaderboard-list li:nth-child(odd) { background: rgba(255,255,255,0.03); }
+    .leaderboard-list li.is-self {
+      background: rgba(79, 247, 255, 0.12);
+      border: 1px solid rgba(79, 247, 255, 0.4);
+    }
+    .leaderboard-list .lb-rank {
+      font-weight: 700;
+      color: var(--neon-yellow);
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+    }
+    .leaderboard-list li:nth-child(1) .lb-rank { color: #ffd84a; }
+    .leaderboard-list li:nth-child(2) .lb-rank { color: #d6dbff; }
+    .leaderboard-list li:nth-child(3) .lb-rank { color: #ffa97a; }
+    .leaderboard-list .lb-name {
+      color: var(--text-soft);
+      font-weight: 600;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .leaderboard-list .lb-meta {
+      color: var(--text-dim);
+      font-size: 11px;
+      margin-left: 6px;
+      font-weight: 400;
+    }
+    .leaderboard-list .lb-score {
+      font-weight: 700;
+      color: var(--neon-cyan);
+      font-variant-numeric: tabular-nums;
+    }
+    .lb-empty {
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 13px;
+      padding: 16px;
+    }
+
     @media (min-width: 768px) {
       .mobile-controls { display: none; }
       .question-panel { padding: 14px 22px; }
@@ -544,6 +659,23 @@
           </div>
         </div>
 
+        <div class="submit-block" id="submitBlock">
+          <h3 id="submitTitle">🏆 上傳成績到排行榜</h3>
+          <div class="submit-row">
+            <input class="name-input" id="nameInput" type="text" maxlength="12"
+                   placeholder="輸入名字（最多 12 字）" autocomplete="off" />
+            <button class="submit-btn" id="submitScoreBtn" type="button">上傳</button>
+          </div>
+          <p class="submit-status" id="submitStatus"></p>
+        </div>
+
+        <div class="submit-block" id="boardBlock" hidden>
+          <h3>🥇 本模式排行榜 Top 10</h3>
+          <ul class="leaderboard-list" id="leaderboardList">
+            <li class="lb-empty">載入中…</li>
+          </ul>
+        </div>
+
         <div class="action-row">
           <button class="primary-btn" id="playAgainBtn" type="button">再玩一次</button>
           <button class="ghost-btn" id="backToTitleBtn" type="button">換模式</button>
@@ -554,6 +686,12 @@
   </div>
 
   <script>
+  /* =========================================================
+   * 0. Leaderboard config — edit LEADERBOARD_API after deploying the Worker
+   * ======================================================= */
+  const LEADERBOARD_API = ""; // e.g. "https://class-leaderboard.advposys.workers.dev"
+  const GAME_ID = "w11-shooting";
+
   /* =========================================================
    * 1. Vocabulary data (W11)
    * ======================================================= */
@@ -1218,6 +1356,9 @@
     State.questionCount = State.questions.length;
     State.bullets = [];
     State.particles = [];
+    State.startedAt = Date.now();
+    State.endedAt = 0;
+    State.lastAccuracy = 0;
     Player.init();
     spawnQuestion();
     document.getElementById("titleOverlay").hidden = true;
@@ -1228,17 +1369,23 @@
 
   function endGame(success) {
     State.status = "gameover";
+    State.endedAt = Date.now();
+    State.lastAccuracy = (() => {
+      const total = State.correct + State.wrong;
+      return total > 0 ? Math.round((State.correct / total) * 100) : 0;
+    })();
     document.getElementById("goTitle").textContent = success ? "任務成功 🎉" : "任務失敗";
     document.getElementById("goSubtitle").textContent = success
       ? "你完成了所有單字射擊任務！"
       : "再挑戰一次，把所有外星單字打下來吧！";
     document.getElementById("goScore").textContent = State.score;
-    const total = State.correct + State.wrong;
-    const acc = total > 0 ? Math.round((State.correct / total) * 100) : 0;
-    document.getElementById("goAcc").textContent = acc + "%";
+    document.getElementById("goAcc").textContent = State.lastAccuracy + "%";
     document.getElementById("goCombo").textContent = State.maxCombo;
     document.getElementById("gameOverOverlay").hidden = false;
     if (success) Audio.win(); else Audio.lose();
+
+    // Leaderboard UI reset
+    Leaderboard.prepareGameOverPanel();
   }
 
   function togglePause() {
@@ -1470,6 +1617,173 @@
   }
 
   /* =========================================================
+   * 10b. Leaderboard (calls Cloudflare Worker API)
+   * ======================================================= */
+  const Leaderboard = (() => {
+    const NAME_KEY = "shootingGame.lastName";
+    let submittingPromise = null;
+    let lastSubmission = null;   // { id, rank, total }
+
+    function isConfigured() { return typeof LEADERBOARD_API === "string" && LEADERBOARD_API.length > 0; }
+
+    function setStatus(text, kind) {
+      const el = document.getElementById("submitStatus");
+      el.textContent = text || "";
+      el.className = "submit-status" + (kind ? " " + kind : "");
+    }
+
+    function prepareGameOverPanel() {
+      const submitBlock = document.getElementById("submitBlock");
+      const boardBlock  = document.getElementById("boardBlock");
+      const nameInput   = document.getElementById("nameInput");
+      const submitBtn   = document.getElementById("submitScoreBtn");
+      const submitTitle = document.getElementById("submitTitle");
+
+      lastSubmission = null;
+      setStatus("");
+
+      if (!isConfigured()) {
+        // Show local-only mode
+        submitBlock.hidden = false;
+        submitTitle.textContent = "🏆 排行榜（離線模式）";
+        nameInput.disabled = true;
+        submitBtn.disabled = true;
+        setStatus("尚未設定 LEADERBOARD_API，分數只會顯示在這裡，未上傳。", "err");
+        boardBlock.hidden = true;
+        return;
+      }
+
+      submitBlock.hidden = false;
+      submitTitle.textContent = "🏆 上傳成績到排行榜";
+      nameInput.disabled = false;
+      submitBtn.disabled = false;
+      submitBtn.textContent = "上傳";
+
+      try {
+        const remembered = localStorage.getItem(NAME_KEY);
+        if (remembered) nameInput.value = remembered;
+      } catch (_) {}
+
+      boardBlock.hidden = true;
+      document.getElementById("leaderboardList").innerHTML = '<li class="lb-empty">上傳後會顯示前 10 名</li>';
+    }
+
+    async function submit() {
+      if (!isConfigured() || submittingPromise) return;
+      const nameInput = document.getElementById("nameInput");
+      const submitBtn = document.getElementById("submitScoreBtn");
+      const name = (nameInput.value || "").trim();
+
+      if (name.length === 0) {
+        setStatus("請先輸入名字", "err");
+        nameInput.focus();
+        return;
+      }
+      if ([...name].length > 12) {
+        setStatus("名字最多 12 字", "err");
+        return;
+      }
+
+      try { localStorage.setItem(NAME_KEY, name); } catch (_) {}
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "上傳中…";
+      setStatus("傳送中…");
+
+      const payload = {
+        game_id: GAME_ID,
+        mode: State.mode,
+        player_name: name,
+        score: State.score,
+        accuracy: State.lastAccuracy,
+        max_combo: State.maxCombo,
+        duration_ms: State.endedAt && State.startedAt ? (State.endedAt - State.startedAt) : null
+      };
+
+      submittingPromise = (async () => {
+        try {
+          const res = await fetch(LEADERBOARD_API.replace(/\/$/, "") + "/api/scores", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok || !data.ok) {
+            const code = (data && data.error) || ("HTTP " + res.status);
+            const friendly = code === "RATE_LIMITED_MINUTE" ? "上傳太頻繁，請等 1 分鐘再試"
+                           : code === "RATE_LIMITED_HOUR"   ? "你已上傳很多次了，請晚一點再試"
+                           : code === "BAD_NAME"            ? "名字無效"
+                           : code === "SCORE_EXCEEDS_MAX"   ? "分數異常，無法上傳"
+                           : "上傳失敗：" + code;
+            setStatus(friendly, "err");
+            submitBtn.disabled = false;
+            submitBtn.textContent = "重試";
+            return;
+          }
+          lastSubmission = { id: data.id, rank: data.rank, total: data.total };
+          setStatus(`✓ 已上傳！你是第 ${data.rank} 名（共 ${data.total} 人）`, "ok");
+          submitBtn.textContent = "已上傳";
+          submitBtn.disabled = true;
+          await loadBoard();
+        } catch (err) {
+          setStatus("連線失敗，請檢查網路後重試", "err");
+          submitBtn.disabled = false;
+          submitBtn.textContent = "重試";
+        } finally {
+          submittingPromise = null;
+        }
+      })();
+    }
+
+    async function loadBoard() {
+      const list = document.getElementById("leaderboardList");
+      const block = document.getElementById("boardBlock");
+      block.hidden = false;
+      list.innerHTML = '<li class="lb-empty">載入中…</li>';
+      try {
+        const url = LEADERBOARD_API.replace(/\/$/, "") +
+          `/api/leaderboard?game_id=${encodeURIComponent(GAME_ID)}&mode=${encodeURIComponent(State.mode)}&limit=10`;
+        const res = await fetch(url);
+        const data = await res.json();
+        if (!res.ok || !Array.isArray(data.entries)) {
+          list.innerHTML = '<li class="lb-empty">排行榜載入失敗</li>';
+          return;
+        }
+        if (data.entries.length === 0) {
+          list.innerHTML = '<li class="lb-empty">還沒有人上榜，你是第一個！</li>';
+          return;
+        }
+        list.innerHTML = data.entries.map((e) => {
+          const isSelf = lastSubmission && e.id === lastSubmission.id;
+          const acc = (e.accuracy != null) ? `${e.accuracy}%` : "—";
+          const combo = (e.max_combo != null) ? `連擊×${e.max_combo}` : "";
+          const meta = `<span class="lb-meta">${acc}　${combo}</span>`;
+          return `<li class="${isSelf ? "is-self" : ""}">
+            <span class="lb-rank">${e.rank}</span>
+            <span class="lb-name">${escapeHtml(e.player_name)}${meta}</span>
+            <span class="lb-score">${e.score}</span>
+          </li>`;
+        }).join("");
+      } catch (err) {
+        list.innerHTML = '<li class="lb-empty">排行榜載入失敗（網路問題）</li>';
+      }
+    }
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+    }
+
+    function bind() {
+      document.getElementById("submitScoreBtn").addEventListener("click", submit);
+      document.getElementById("nameInput").addEventListener("keydown", (e) => {
+        if (e.key === "Enter") submit();
+      });
+    }
+
+    return { bind, prepareGameOverPanel };
+  })();
+
+  /* =========================================================
    * 11. Init
    * ======================================================= */
   function init() {
@@ -1480,6 +1794,7 @@
     bindMobile();
     bindPointer();
     bindUI();
+    Leaderboard.bind();
     requestAnimationFrame(loop);
   }
   init();
