@@ -501,7 +501,7 @@
         <div class="controls-help">
           <strong style="color: var(--neon-cyan);">三種操作模式（可隨時切換）：</strong><br>
           🖱️ <strong>滑鼠</strong>：移動滑鼠瞄準，按住左鍵連射、放開停止<br>
-          📱 <strong>手機 / 平板</strong>：手指在畫面任意處按住拖曳即可同時瞄準＋射擊；左下方向鍵與右下 FIRE 鈕也可使用<br>
+          📱 <strong>手機 / 平板</strong>：手指在畫面任意處拖曳移動太空船，按右下 <strong>FIRE</strong> 按鈕射擊（左下 ◀ ▶ 也可用）<br>
           ⌨️ <strong>鍵盤</strong>：← → 或 A / D 移動，空白鍵射擊
         </div>
 
@@ -1318,15 +1318,17 @@
       if (isUIElement(e.target)) return;
       e.preventDefault();
       Player.targetX = getStageX(e);
-      Player.firing = true;
-      if (e.pointerType !== "mouse") activeTouchId = e.pointerId;
+      if (e.pointerType === "mouse") {
+        Player.firing = true;           // mouse: press = fire
+      } else {
+        activeTouchId = e.pointerId;    // touch / pen: drag only moves; firing handled by FIRE button
+      }
       try { stage.setPointerCapture(e.pointerId); } catch (_) {}
     });
 
     const release = (e) => {
       if (e.pointerId === activeTouchId) {
-        activeTouchId = null;
-        Player.firing = false;          // touch: lift = stop
+        activeTouchId = null;           // touch: lift = stop tracking position only
       } else if (e.pointerType === "mouse") {
         Player.firing = false;          // mouse: release = stop firing, but keep aiming
       }
